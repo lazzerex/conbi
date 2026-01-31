@@ -1,5 +1,8 @@
 # ConBi - Ứng Dụng Quản Lý Task
 
+
+<img width="1301" height="746" alt="Conbi" src="https://github.com/user-attachments/assets/f691c168-1408-4b9b-bac6-da343fbff71d" />
+
 ## Giới Thiệu
 
 ConBi là một ứng dụng quản lý task đơn giản được xây dựng trên nền tảng Cloud, sử dụng **React** cho frontend và **Supabase** cho backend. Dự án này được phát triển như một bài tập thực hành về Cloud Computing, tập trung vào các thao tác CRUD và xác thực người dùng.
