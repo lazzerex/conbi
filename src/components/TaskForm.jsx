@@ -142,13 +142,13 @@ export default function TaskForm({ user, task, onClose, onSave }) {
         taskId = data[0].id
       }
 
-      // Delete existing task_categories
+    
       await supabase
         .from('task_categories')
         .delete()
         .eq('task_id', taskId)
 
-      // Insert new task_categories
+      
       if (selectedCategories.length > 0) {
         const taskCategories = selectedCategories.map(categoryId => ({
           task_id: taskId,
@@ -227,25 +227,25 @@ export default function TaskForm({ user, task, onClose, onSave }) {
 
   return (
     <motion.div 
-      style={styles.overlay} 
+      className="task-form-overlay"
       onClick={onClose}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
       <motion.div 
-        style={styles.modal} 
+        className="task-form-modal" 
         onClick={(e) => e.stopPropagation()}
         initial={{ scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.9, y: 20 }}
         transition={{ type: 'spring', damping: 25 }}
       >
-        <div style={styles.header}>
-          <h2 style={styles.title}>{task ? 'Edit Task' : 'New Task'}</h2>
+        <div className="task-form-header">
+          <h2 className="task-form-title">{task ? 'Edit Task' : 'New Task'}</h2>
           <motion.button 
             onClick={onClose} 
-            style={styles.closeButton}
+            className="task-form-close-button"
             whileHover={{ rotate: 90 }}
             transition={{ duration: 0.2 }}
           >
@@ -253,40 +253,40 @@ export default function TaskForm({ user, task, onClose, onSave }) {
           </motion.button>
         </div>
 
-        <form onSubmit={handleSubmit} style={styles.form}>
-          <div style={styles.formGroup}>
-            <label style={styles.label}>Title</label>
+        <form onSubmit={handleSubmit} className="task-form-container">
+          <div className="task-form-group">
+            <label className="task-form-label">Title</label>
             <input
               type="text"
               name="title"
               value={formData.title}
               onChange={handleChange}
               required
-              style={styles.input}
+              className="task-form-input"
               placeholder="Enter task title"
             />
           </div>
 
-          <div style={styles.formGroup}>
-            <label style={styles.label}>Description</label>
+          <div className="task-form-group">
+            <label className="task-form-label">Description</label>
             <textarea
               name="description"
               value={formData.description}
               onChange={handleChange}
               rows="4"
-              style={{ ...styles.input, resize: 'vertical' }}
+              className="task-form-input task-form-textarea"
               placeholder="Enter task description"
             />
           </div>
 
-          <div style={styles.row}>
-            <div style={styles.formGroup}>
-              <label style={styles.label}>Status</label>
+          <div className="task-form-row">
+            <div className="task-form-group">
+              <label className="task-form-label">Status</label>
               <select
                 name="status"
                 value={formData.status}
                 onChange={handleChange}
-                style={styles.input}
+                className="task-form-input"
               >
                 <option value="pending">Pending</option>
                 <option value="in_progress">In Progress</option>
@@ -294,13 +294,13 @@ export default function TaskForm({ user, task, onClose, onSave }) {
               </select>
             </div>
 
-            <div style={styles.formGroup}>
-              <label style={styles.label}>Priority</label>
+            <div className="task-form-group">
+              <label className="task-form-label">Priority</label>
               <select
                 name="priority"
                 value={formData.priority}
                 onChange={handleChange}
-                style={styles.input}
+                className="task-form-input"
               >
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
@@ -309,27 +309,27 @@ export default function TaskForm({ user, task, onClose, onSave }) {
             </div>
           </div>
 
-          <div style={styles.formGroup}>
-            <label style={styles.label}>Due Date</label>
+          <div className="task-form-group">
+            <label className="task-form-label">Due Date</label>
             <input
               type="date"
               name="due_date"
               value={formData.due_date}
               onChange={handleChange}
-              style={styles.input}
+              className="task-form-input"
             />
           </div>
 
-          <div style={styles.formGroup}>
-            <label style={styles.label}>Categories</label>
-            <div style={styles.categoriesContainer}>
+          <div className="task-form-group">
+            <label className="task-form-label">Categories</label>
+            <div className="task-form-categories-container">
               {categories.map(category => (
                 <motion.button
                   key={category.id}
                   type="button"
                   onClick={() => handleCategoryToggle(category.id)}
+                  className="task-form-category-chip"
                   style={{
-                    ...styles.categoryChip,
                     backgroundColor: selectedCategories.includes(category.id) 
                       ? category.color 
                       : '#f1f5f9',
@@ -349,20 +349,20 @@ export default function TaskForm({ user, task, onClose, onSave }) {
                 <motion.button
                   type="button"
                   onClick={() => setShowNewCategory(true)}
-                  style={styles.addCategoryButton}
+                  className="task-form-add-category-button"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   + New Category
                 </motion.button>
               ) : (
-                <div style={styles.newCategoryInput}>
+                <div className="task-form-new-category-input">
                   <input
                     type="text"
                     value={newCategoryName}
                     onChange={(e) => setNewCategoryName(e.target.value)}
                     placeholder="Category name"
-                    style={styles.categoryInput}
+                    className="task-form-category-input"
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') {
                         e.preventDefault()
@@ -377,7 +377,7 @@ export default function TaskForm({ user, task, onClose, onSave }) {
                   <button
                     type="button"
                     onClick={handleCreateCategory}
-                    style={styles.saveCategory}
+                    className="task-form-save-category"
                   >
                     ✓
                   </button>
@@ -387,7 +387,7 @@ export default function TaskForm({ user, task, onClose, onSave }) {
                       setShowNewCategory(false)
                       setNewCategoryName('')
                     }}
-                    style={styles.cancelCategory}
+                    className="task-form-cancel-category"
                   >
                     ✕
                   </button>
@@ -398,7 +398,7 @@ export default function TaskForm({ user, task, onClose, onSave }) {
 
           {error && (
             <motion.div 
-              style={styles.error}
+              className="task-form-error"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
             >
@@ -406,11 +406,11 @@ export default function TaskForm({ user, task, onClose, onSave }) {
             </motion.div>
           )}
 
-          <div style={styles.actions}>
+          <div className="task-form-actions">
             <motion.button 
               type="button" 
               onClick={onClose} 
-              style={styles.cancelButton}
+              className="task-form-cancel-button"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -420,7 +420,7 @@ export default function TaskForm({ user, task, onClose, onSave }) {
               <motion.button
                 type="button"
                 onClick={() => setShowDeleteConfirm(true)}
-                style={{ ...styles.cancelButton, background: '#fef2f2', color: '#ef4444', display: 'flex', alignItems: 'center', gap: 6, border: '1px solid #fee2e2' }}
+                className="task-form-cancel-button task-form-delete-button"
                 disabled={deleting}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -431,7 +431,7 @@ export default function TaskForm({ user, task, onClose, onSave }) {
             <motion.button 
               type="submit" 
               disabled={loading} 
-              style={styles.submitButton}
+              className="task-form-submit-button"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -439,33 +439,32 @@ export default function TaskForm({ user, task, onClose, onSave }) {
             </motion.button>
           </div>
         </form>
-        
-        {/* Delete Confirmation Modal */}
+      
         <AnimatePresence>
           {showDeleteConfirm && (
             <motion.div
-              style={styles.deleteOverlay}
+              className="task-delete-overlay"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setShowDeleteConfirm(false)}
             >
               <motion.div
-                style={styles.deleteModal}
+                className="task-delete-modal"
                 initial={{ scale: 0.9, y: 20 }}
                 animate={{ scale: 1, y: 0 }}
                 exit={{ scale: 0.9, y: 20 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                <div style={styles.deleteIcon}>
+                <div className="task-delete-icon">
                   <Trash2 size={32} color="#ef4444" />
                 </div>
-                <h3 style={styles.deleteTitle}>Delete Task?</h3>
-                <p style={styles.deleteText}>Are you sure you want to delete this task? This action cannot be undone.</p>
-                <div style={styles.deleteActions}>
+                <h3 className="task-delete-title">Delete Task?</h3>
+                <p className="task-delete-text">Are you sure you want to delete this task? This action cannot be undone.</p>
+                <div className="task-delete-actions">
                   <motion.button
                     onClick={() => setShowDeleteConfirm(false)}
-                    style={styles.deleteCancelBtn}
+                    className="task-delete-cancel-btn"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -473,7 +472,7 @@ export default function TaskForm({ user, task, onClose, onSave }) {
                   </motion.button>
                   <motion.button
                     onClick={handleDelete}
-                    style={styles.deleteConfirmBtn}
+                    className="task-delete-confirm-btn"
                     disabled={deleting}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -490,257 +489,3 @@ export default function TaskForm({ user, task, onClose, onSave }) {
   )
 }
 
-const styles = {
-  overlay: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(15, 23, 42, 0.4)',
-    backdropFilter: 'blur(4px)',
-    WebkitBackdropFilter: 'blur(4px)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 1000,
-    padding: '20px',
-  },
-  modal: {
-    backgroundColor: 'white',
-    borderRadius: '24px',
-    width: '100%',
-    maxWidth: '600px',
-    maxHeight: '90vh',
-    overflow: 'auto',
-    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-  },
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '28px 32px 20px',
-    borderBottom: '1px solid #f1f5f9',
-  },
-  title: {
-    fontSize: '24px',
-    fontWeight: '700',
-    color: '#0f172a',
-    margin: 0,
-    letterSpacing: '-0.01em',
-  },
-  closeButton: {
-    background: '#f1f5f9',
-    border: 'none',
-    cursor: 'pointer',
-    padding: '8px',
-    color: '#64748b',
-    borderRadius: '10px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  form: {
-    padding: '28px 32px',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '24px',
-  },
-  formGroup: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '8px',
-    flex: 1,
-  },
-  label: {
-    fontSize: '14px',
-    fontWeight: '600',
-    color: '#334155',
-    textTransform: 'capitalize',
-  },
-  input: {
-    padding: '14px 16px',
-    backgroundColor: '#f8fafc',
-    border: '1px solid #e2e8f0',
-    borderRadius: '12px',
-    fontSize: '15px',
-    color: '#0f172a',
-    outline: 'none',
-    transition: 'all 0.2s',
-    fontWeight: '500',
-  },
-  row: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-    gap: '20px',
-  },
-  error: {
-    padding: '14px 16px',
-    backgroundColor: '#fef2f2',
-    color: '#ef4444',
-    borderRadius: '12px',
-    fontSize: '14px',
-    border: '1px solid #fee2e2',
-    fontWeight: '500',
-  },
-  actions: {
-    display: 'flex',
-    gap: '12px',
-    justifyContent: 'flex-end',
-    paddingTop: '12px',
-  },
-  cancelButton: {
-    padding: '12px 28px',
-    background: 'none',
-    color: '#64748b',
-    border: '1px solid #e2e8f0',
-    borderRadius: '12px',
-    fontSize: '15px',
-    fontWeight: '600',
-    cursor: 'pointer',
-  },
-  submitButton: {
-    padding: '12px 28px',
-    backgroundColor: '#0f172a',
-    color: 'white',
-    border: 'none',
-    borderRadius: '12px',
-    fontSize: '15px',
-    fontWeight: '600',
-    cursor: 'pointer',
-    boxShadow: '0 4px 6px -1px rgba(15, 23, 42, 0.1)',
-  },
-  categoriesContainer: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: '8px',
-    padding: '4px 0',
-  },
-  categoryChip: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '6px',
-    padding: '8px 14px',
-    borderRadius: '10px',
-    fontSize: '14px',
-    fontWeight: '600',
-    cursor: 'pointer',
-    transition: 'all 0.2s',
-  },
-  addCategoryButton: {
-    padding: '8px 14px',
-    backgroundColor: 'transparent',
-    color: '#4f46e5',
-    border: '1px dashed #4f46e5',
-    borderRadius: '10px',
-    fontSize: '14px',
-    fontWeight: '600',
-    cursor: 'pointer',
-    transition: 'all 0.2s',
-  },
-  newCategoryInput: {
-    display: 'flex',
-    gap: '6px',
-    alignItems: 'center',
-  },
-  categoryInput: {
-    padding: '8px 12px',
-    backgroundColor: '#f8fafc',
-    border: '1px solid #e2e8f0',
-    borderRadius: '8px',
-    fontSize: '14px',
-    color: '#0f172a',
-    outline: 'none',
-    fontWeight: '500',
-    minWidth: '150px',
-  },
-  saveCategory: {
-    padding: '8px 12px',
-    backgroundColor: '#10b981',
-    color: 'white',
-    border: 'none',
-    borderRadius: '8px',
-    fontSize: '16px',
-    cursor: 'pointer',
-    fontWeight: '600',
-  },
-  cancelCategory: {
-    padding: '8px 12px',
-    backgroundColor: '#ef4444',
-    color: 'white',
-    border: 'none',
-    borderRadius: '8px',
-    fontSize: '16px',
-    cursor: 'pointer',
-    fontWeight: '600',
-  },
-  deleteOverlay: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 1001,
-  },
-  deleteModal: {
-    backgroundColor: 'white',
-    borderRadius: '20px',
-    padding: '40px',
-    maxWidth: '420px',
-    width: '90%',
-    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-    textAlign: 'center',
-  },
-  deleteIcon: {
-    width: '80px',
-    height: '80px',
-    borderRadius: '50%',
-    backgroundColor: '#fef2f2',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: '0 auto 24px',
-  },
-  deleteTitle: {
-    fontSize: '24px',
-    fontWeight: '700',
-    color: '#0f172a',
-    marginBottom: '12px',
-  },
-  deleteText: {
-    fontSize: '15px',
-    color: '#64748b',
-    lineHeight: '1.6',
-    marginBottom: '32px',
-  },
-  deleteActions: {
-    display: 'flex',
-    gap: '12px',
-    justifyContent: 'center',
-  },
-  deleteCancelBtn: {
-    padding: '12px 28px',
-    background: 'none',
-    color: '#64748b',
-    border: '1px solid #e2e8f0',
-    borderRadius: '12px',
-    fontSize: '15px',
-    fontWeight: '600',
-    cursor: 'pointer',
-  },
-  deleteConfirmBtn: {
-    padding: '12px 28px',
-    backgroundColor: '#ef4444',
-    color: 'white',
-    border: 'none',
-    borderRadius: '12px',
-    fontSize: '15px',
-    fontWeight: '600',
-    cursor: 'pointer',
-    boxShadow: '0 4px 6px -1px rgba(239, 68, 68, 0.3)',
-  },
-}

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Edit2, Trash2, Calendar, Flag } from 'lucide-react'
+import './TaskItem.css'
 
 export default function TaskItem({ task, onEdit, onDelete }) {
   const getStatusColor = (status) => {
@@ -27,37 +28,43 @@ export default function TaskItem({ task, onEdit, onDelete }) {
   }
   return (
     <motion.div 
-      style={styles.container}
+      className="task-item-container"
       whileHover={{ y: -2 }}
       transition={{ duration: 0.2 }}
     >
-      <div style={styles.content} onClick={() => onEdit(task)}>
-        <div style={styles.header}>
-          <h3 style={styles.title}>{task.title}</h3>
-          <div style={styles.badges}>
-            <span style={{ ...styles.badge, backgroundColor: getStatusColor(task.status) + '30', color: getStatusColor(task.status) }}>
+      <div className="task-item-content" onClick={() => onEdit(task)}>
+        <div className="task-item-header">
+          <h3 className="task-item-title">{task.title}</h3>
+          <div className="task-item-badges">
+            <span 
+              className="task-item-badge" 
+              style={{ backgroundColor: getStatusColor(task.status) + '30', color: getStatusColor(task.status) }}
+            >
               {task.status.replace('_', ' ')}
             </span>
-            <span style={{ ...styles.badge, backgroundColor: getPriorityColor(task.priority) + '30', color: getPriorityColor(task.priority) }}>
+            <span 
+              className="task-item-badge" 
+              style={{ backgroundColor: getPriorityColor(task.priority) + '30', color: getPriorityColor(task.priority) }}
+            >
               <Flag size={11} />
               {task.priority}
             </span>
           </div>
         </div>
         {task.description && (
-          <p style={styles.description}>{task.description}</p>
+          <p className="task-item-description">{task.description}</p>
         )}
         {task.due_date && (
-          <div style={styles.dueDate}>
+          <div className="task-item-due-date">
             <Calendar size={13} />
             <span>Due: {formatDate(task.due_date)}</span>
           </div>
         )}
       </div>
-      <div style={styles.actions}>
+      <div className="task-item-actions">
         <motion.button 
           onClick={(e) => { e.stopPropagation(); onEdit(task); }} 
-          style={{ ...styles.button, backgroundColor: '#eff6ff', color: '#3b82f6' }}
+          className="task-item-button task-item-edit-button"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
@@ -65,7 +72,7 @@ export default function TaskItem({ task, onEdit, onDelete }) {
         </motion.button>
         <motion.button 
           onClick={(e) => { e.stopPropagation(); onDelete(task.id); }} 
-          style={{ ...styles.button, backgroundColor: '#fef2f2', color: '#ef4444' }}
+          className="task-item-button task-item-delete-button"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
@@ -74,81 +81,4 @@ export default function TaskItem({ task, onEdit, onDelete }) {
       </div>
     </motion.div>
   )
-}
-
-const styles = {
-  container: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    padding: '24px',
-    backgroundColor: 'white',
-    borderRadius: '20px',
-    border: '1px solid #f1f5f9',
-    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.02)',
-    cursor: 'pointer',
-    transition: 'all 0.2s',
-  },
-  content: {
-    flex: 1,
-  },
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    marginBottom: '8px',
-    gap: '12px',
-  },
-  title: {
-    fontSize: '18px',
-    fontWeight: '700',
-    color: '#0f172a',
-    margin: 0,
-    letterSpacing: '-0.01em',
-  },
-  badges: {
-    display: 'flex',
-    gap: '8px',
-    flexShrink: 0,
-  },
-  badge: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '4px',
-    padding: '4px 10px',
-    borderRadius: '8px',
-    fontSize: '12px',
-    fontWeight: '600',
-    textTransform: 'capitalize',
-    letterSpacing: '0.02em',
-  },
-  description: {
-    fontSize: '15px',
-    color: '#64748b',
-    margin: '8px 0',
-    lineHeight: '1.6',
-  },
-  dueDate: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '6px',
-    fontSize: '13px',
-    color: '#94a3b8',
-    marginTop: '12px',
-    fontWeight: '500',
-  },
-  actions: {
-    display: 'flex',
-    gap: '8px',
-    marginLeft: '16px',
-  },
-  button: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '10px',
-    border: 'none',
-    borderRadius: '10px',
-    cursor: 'pointer',
-  },
 }
