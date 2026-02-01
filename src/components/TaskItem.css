@@ -1,0 +1,119 @@
+.task-item-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 24px;
+  background-color: white;
+  border-radius: 20px;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.task-item-content {
+  flex: 1;
+}
+
+.task-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+  gap: 12px;
+}
+
+.task-item-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.task-item-badges {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.task-item-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+}
+
+.task-item-description {
+  font-size: 15px;
+  color: #64748b;
+  margin: 8px 0;
+  line-height: 1.6;
+}
+
+.task-item-due-date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #94a3b8;
+  margin-top: 12px;
+  font-weight: 500;
+}
+
+.task-item-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: 16px;
+}
+
+.task-item-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.task-item-edit-button {
+  background-color: #eff6ff;
+  color: #3b82f6;
+}
+
+.task-item-delete-button {
+  background-color: #fef2f2;
+  color: #ef4444;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .task-item-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .task-item-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .task-item-badges {
+    flex-wrap: wrap;
+  }
+  
+  .task-item-actions {
+    margin-left: 0;
+    justify-content: flex-end;
+    margin-top: 12px;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 12px;
+  }
+}

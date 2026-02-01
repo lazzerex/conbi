@@ -1,0 +1,343 @@
+.task-form-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.task-form-modal {
+  background-color: white;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.task-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px 32px 20px;
+  border-bottom: 1px solid #f1f5f9;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 10;
+}
+
+.task-form-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.task-form-close-button {
+  background: #f1f5f9;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: #64748b;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-form-container {
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.task-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.task-form-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+  text-transform: capitalize;
+}
+
+.task-form-input {
+  padding: 14px 16px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 15px;
+  color: #0f172a;
+  outline: none;
+  transition: all 0.2s;
+  font-weight: 500;
+  width: 100%;
+}
+
+.task-form-input:focus {
+  border-color: #0d9488;
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+}
+
+.task-form-textarea {
+  resize: vertical;
+}
+
+.task-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.task-form-error {
+  padding: 14px 16px;
+  background-color: #fef2f2;
+  color: #ef4444;
+  border-radius: 12px;
+  font-size: 14px;
+  border: 1px solid #fee2e2;
+  font-weight: 500;
+}
+
+.task-form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding-top: 12px;
+}
+
+.task-form-cancel-button {
+  padding: 12px 28px;
+  background: none;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-form-delete-button {
+  background: #fef2f2;
+  color: #ef4444;
+  border: 1px solid #fee2e2; 
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.task-form-submit-button {
+  padding: 12px 28px;
+  background-color: #0f172a;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-form-categories-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.task-form-category-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.task-form-add-category-button {
+  padding: 8px 14px;
+  background-color: transparent;
+  color: #4f46e5;
+  border: 1px dashed #4f46e5;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.task-form-new-category-input {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.task-form-category-input {
+  padding: 8px 12px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #0f172a;
+  outline: none;
+  font-weight: 500;
+  min-width: 150px;
+}
+
+.task-form-save-category {
+  padding: 8px 12px;
+  background-color: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.task-form-cancel-category {
+  padding: 8px 12px;
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.task-delete-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  zIndex: 1001;
+}
+
+.task-delete-modal {
+  background-color: white;
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.task-delete-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #fef2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+}
+
+.task-delete-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 12px;
+}
+
+.task-delete-text {
+  font-size: 15px;
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.task-delete-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.task-delete-cancel-btn {
+  padding: 12px 28px;
+  background: none;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.task-delete-confirm-btn {
+  padding: 12px 28px;
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .task-form-overlay {
+    padding: 0;
+    align-items: flex-end; 
+  }
+
+  .task-form-modal {
+    max-height: 100vh;
+    height: 100%;
+    border-radius: 0;
+    max-width: 100%;
+  }
+  
+  .task-form-row {
+      grid-template-columns: 1fr;
+  }
+
+  .task-form-actions {
+    flex-direction: column-reverse;
+  }
+  
+  .task-form-cancel-button, 
+  .task-form-submit-button,
+  .task-form-delete-button {
+      width: 100%;
+  }
+
+  .task-delete-actions {
+      flex-direction: column-reverse;
+  }
+}
