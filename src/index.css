@@ -18,9 +18,9 @@ body {
 input:focus,
 textarea:focus,
 select:focus {
-  border-color: #6366f1;
+  border-color: #0d9488;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
 }
 
 button {
