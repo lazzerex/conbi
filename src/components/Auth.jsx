@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { supabase } from '../lib/supabase'
 import { Mail, Lock, User, Eye, EyeOff, LayoutGrid, ArrowRight, CheckCircle2, CheckCircle } from 'lucide-react'
+import './Auth.css'
 
 export default function Auth() {
   const [loading, setLoading] = useState(false)
@@ -64,25 +65,24 @@ export default function Auth() {
   }
 
   return (
-    <div style={styles.container}>
+    <div className="auth-container">
       <motion.div 
-        style={styles.wrapper}
+        className="auth-wrapper"
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
-        {/* Left Side - Info Panel */}
-        <div style={styles.infoPanel}>
-          <div style={styles.brand}>
-            <div style={styles.logoBox}>
+        <div className="auth-info-panel">
+          <div className="auth-brand">
+            <div className="auth-logo-box">
               <LayoutGrid size={24} color="#0ea5e9" />
             </div>
-            <h1 style={styles.brandName}>ConBi</h1>
+            <h1 className="auth-brand-name">ConBi</h1>
           </div>
           
-          <div style={styles.infoContent}>
+          <div className="auth-info-content">
             <motion.h2 
-              style={styles.welcomeTitle}
+              className="auth-welcome-title"
               key={isLogin ? 'login-title' : 'signup-title'}
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -92,7 +92,7 @@ export default function Auth() {
             </motion.h2>
             
             <motion.p 
-              style={styles.welcomeText}
+              className="auth-welcome-text"
               key={isLogin ? 'login-text' : 'signup-text'}
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
@@ -104,32 +104,31 @@ export default function Auth() {
             </motion.p>
 
             <motion.div 
-              style={styles.featureList}
+              className="auth-feature-list"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
             >
-              <div style={styles.featureItem}>
+              <div className="auth-feature-item">
                 <CheckCircle2 size={18} color="#38bdf8" />
                 <span>Smart task organization</span>
               </div>
-              <div style={styles.featureItem}>
+              <div className="auth-feature-item">
                 <CheckCircle2 size={18} color="#38bdf8" />
                 <span>Real-time collaboration</span>
               </div>
-              <div style={styles.featureItem}>
+              <div className="auth-feature-item">
                 <CheckCircle2 size={18} color="#38bdf8" />
                 <span>Seamless cloud sync</span>
               </div>
             </motion.div>
           </div>
 
-          <div style={styles.decorativeOrb} />
+          <div className="auth-decorative-orb" />
         </div>
 
-        {/* Right Side - Form */}
-        <div style={styles.formPanel}>
-          <div style={styles.formContent}>
+        <div className="auth-form-panel">
+          <div className="auth-form-content">
             <AnimatePresence mode="wait">
               {verificationSent ? (
                 <motion.div
@@ -137,28 +136,20 @@ export default function Auth() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  style={{ textAlign: 'center', padding: '20px' }}
+                  className="auth-verification-wrapper"
                 >
                   <motion.div 
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                    style={{ 
-                      display: 'inline-flex', 
-                      padding: '24px', 
-                      borderRadius: '50%', 
-                      backgroundColor: '#e0f2fe',
-                      color: '#0ea5e9',
-                      marginBottom: '32px',
-                      boxShadow: '0 10px 25px -5px rgba(22, 163, 74, 0.2)'
-                    }}
+                    className="auth-check-icon-wrapper"
                   >
                     <CheckCircle size={48} strokeWidth={2.5} />
                   </motion.div>
-                  <h2 style={{ ...styles.title, marginBottom: '16px' }}>Check your email</h2>
-                  <p style={{ fontSize: '16px', lineHeight: '1.6', color: '#0e7490', marginBottom: '32px' }}>
+                  <h2 className="auth-title" style={{ marginBottom: '16px' }}>Check your email</h2>
+                  <p className="auth-check-email-text">
                     We've sent a verification link to<br/>
-                    <strong style={{ color: '#0e7490' }}>{email}</strong>
+                    <strong className="auth-check-email-strong">{email}</strong>
                   </p>
                   <motion.button 
                     onClick={() => {
@@ -167,7 +158,7 @@ export default function Auth() {
                       setEmail('')
                       setPassword('')
                     }}
-                    style={styles.button}
+                    className="auth-button"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -181,10 +172,10 @@ export default function Auth() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                 >
-                  <div style={styles.formHeader}>
-                    <h1 style={styles.title}>{isLogin ? 'Sign in' : 'Create account'}</h1>
-                    <div style={styles.switchRow}>
-                      <span style={styles.switchText}>
+                  <div className="auth-form-header">
+                    <h1 className="auth-title">{isLogin ? 'Sign in' : 'Create account'}</h1>
+                    <div className="auth-switch-row">
+                      <span className="auth-switch-text">
                         {isLogin ? "New to ConBi? " : "Already have an account? "}
                       </span>
                       <button
@@ -193,68 +184,68 @@ export default function Auth() {
                           setIsLogin(!isLogin)
                           setError(null)
                         }}
-                        style={styles.linkButton}
+                        className="auth-link-button"
                       >
                         {isLogin ? 'Create an account' : 'Sign in'}
                       </button>
                     </div>
                   </div>
 
-                  <form onSubmit={handleAuth} style={styles.form}>
+                  <form onSubmit={handleAuth} className="auth-form">
                     <AnimatePresence mode="wait">
                       {!isLogin && (
                         <motion.div 
-                          style={styles.inputGroup}
+                          className="auth-input-group"
                           initial={{ opacity: 0, height: 0, marginTop: -10 }}
                           animate={{ opacity: 1, height: 'auto', marginTop: 0 }}
                           exit={{ opacity: 0, height: 0, marginTop: -10 }}
                         >
-                          <label style={styles.label}>Full Name</label>
-                          <div style={styles.inputWrapper}>
-                            <User size={18} style={styles.icon} />
+                          <label className="auth-label">Full Name</label>
+                          <div className="auth-input-wrapper">
+                            <User size={18} className="auth-icon" />
                             <input
                               type="text"
                               placeholder="John Doe"
                               value={fullName}
                               onChange={(e) => setFullName(e.target.value)}
-                              style={styles.input}
+                              className="auth-input"
                             />
                           </div>
                         </motion.div>
                       )}
                     </AnimatePresence>
 
-                    <div style={styles.inputGroup}>
-                      <label style={styles.label}>Email Address</label>
-                      <div style={styles.inputWrapper}>
-                        <Mail size={18} style={styles.icon} />
+                    <div className="auth-input-group">
+                      <label className="auth-label">Email Address</label>
+                      <div className="auth-input-wrapper">
+                        <Mail size={18} className="auth-icon" />
                         <input
                           type="email"
                           placeholder="you@example.com"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           required
-                          style={styles.input}
+                          className="auth-input"
                         />
                       </div>
                     </div>
 
-                    <div style={styles.inputGroup}>
-                      <label style={styles.label}>Password</label>
-                      <div style={styles.inputWrapper}>
-                        <Lock size={18} style={styles.icon} />
+                    <div className="auth-input-group">
+                      <label className="auth-label">Password</label>
+                      <div className="auth-input-wrapper">
+                        <Lock size={18} className="auth-icon" />
                         <input
                           type={showPassword ? 'text' : 'password'}
                           placeholder="••••••••"
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                           required
-                          style={styles.input}
+                          className="auth-input"
                         />
                         <button
                           type="button"
                           onClick={() => setShowPassword(!showPassword)}
-                          style={styles.eyeButton}
+                          className="auth-eye-button"
                         >
                           {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                         </button>
@@ -264,26 +255,26 @@ export default function Auth() {
                     <AnimatePresence mode="wait">
                       {!isLogin && (
                         <motion.div 
-                          style={styles.inputGroup}
+                          className="auth-input-group"
                           initial={{ opacity: 0, height: 0, marginTop: -10 }}
                           animate={{ opacity: 1, height: 'auto', marginTop: 0 }}
                           exit={{ opacity: 0, height: 0, marginTop: -10 }}
                         >
-                          <label style={styles.label}>Confirm Password</label>
-                          <div style={styles.inputWrapper}>
-                            <Lock size={18} style={styles.icon} />
+                          <label className="auth-label">Confirm Password</label>
+                          <div className="auth-input-wrapper">
+                            <Lock size={18} className="auth-icon" />
                             <input
                               type={showConfirmPassword ? 'text' : 'password'}
                               placeholder="••••••••"
                               value={confirmPassword}
                               onChange={(e) => setConfirmPassword(e.target.value)}
                               required={!isLogin}
-                              style={styles.input}
+                              className="auth-input"
                             />
                             <button
                               type="button"
                               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                              style={styles.eyeButton}
+                              className="auth-eye-button"
                             >
                               {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                             </button>
@@ -294,7 +285,7 @@ export default function Auth() {
 
                     {error && (
                       <motion.div 
-                        style={styles.error}
+                        className="auth-error"
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                       >
@@ -305,7 +296,7 @@ export default function Auth() {
                     <motion.button 
                       type="submit" 
                       disabled={loading} 
-                      style={styles.button}
+                      className="auth-button"
                       whileHover={{ scale: 1.01 }}
                       whileTap={{ scale: 0.99 }}
                     >
@@ -321,221 +312,4 @@ export default function Auth() {
       </motion.div>
     </div>
   )
-}
-
-const styles = {
-  container: {
-    minHeight: '100vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '20px',
-    backgroundColor: '#f0fdfa',
-    backgroundImage: `linear-gradient(rgba(236, 254, 255, 0.85), rgba(236, 254, 255, 0.85)), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=2070')`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundAttachment: 'fixed',
-  },
-  wrapper: {
-    width: '100%',
-    maxWidth: '1200px',
-    minHeight: '680px',
-    backgroundColor: '#ffffff',
-    borderRadius: '24px',
-    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.15)',
-    display: 'flex',
-    overflow: 'hidden',
-    position: 'relative',
-  },
-  infoPanel: {
-    flex: '1',
-    backgroundColor: '#0ea5e9',
-    backgroundImage: 'linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%)',
-    padding: '60px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    position: 'relative',
-    color: 'white',
-    '@media (max-width: 900px)': {
-      display: 'none',
-    },
-  },
-  brand: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '12px',
-    zIndex: 10,
-  },
-  logoBox: {
-    width: '40px',
-    height: '40px',
-    backgroundColor: '#ffffff',
-    borderRadius: '12px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
-  },
-  brandName: {
-    fontSize: '24px',
-    fontWeight: '700',
-    letterSpacing: '-0.02em',
-  },
-  infoContent: {
-    zIndex: 10,
-    maxWidth: '440px',
-  },
-  welcomeTitle: {
-    fontSize: '36px',
-    fontWeight: '700',
-    lineHeight: '1.2',
-    marginBottom: '20px',
-    letterSpacing: '-0.02em',
-  },
-  welcomeText: {
-    fontSize: '18px',
-    lineHeight: '1.6',
-    color: 'rgba(255, 255, 255, 0.85)',
-    marginBottom: '40px',
-  },
-  featureList: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '16px',
-  },
-  featureItem: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '12px',
-    fontSize: '16px',
-    color: 'rgba(255, 255, 255, 0.97)',
-  },
-  decorativeOrb: {
-    position: 'absolute',
-    bottom: '-50px',
-    right: '-50px',
-    width: '300px',
-    height: '300px',
-    background: 'radial-gradient(circle, rgba(14,165,233,0.12) 0%, rgba(255,255,255,0) 70%)',
-    borderRadius: '50%',
-    zIndex: 1,
-  },
-  formPanel: {
-    flex: '1',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: '60px',
-    backgroundColor: '#ffffff',
-  },
-  formContent: {
-    width: '100%',
-    maxWidth: '420px',
-  },
-  formHeader: {
-    marginBottom: '40px',
-  },
-  title: {
-    fontSize: '32px',
-    fontWeight: '700',
-    color: '#0f172a',
-    marginBottom: '12px',
-    letterSpacing: '-0.02em',
-  },
-  switchRow: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '6px',
-    fontSize: '15px',
-  },
-  switchText: {
-    color: '#64748b',
-  },
-  linkButton: {
-    background: 'none',
-    border: 'none',
-    padding: 0,
-    color: '#0ea5e9',
-    fontSize: '15px',
-    fontWeight: '600',
-    cursor: 'pointer',
-    transition: 'color 0.2s',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '24px',
-  },
-  inputGroup: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '8px',
-    overflow: 'hidden',
-  },
-  label: {
-    fontSize: '14px',
-    fontWeight: '600',
-    color: '#334155',
-  },
-  inputWrapper: {
-    position: 'relative',
-    display: 'flex',
-    alignItems: 'center',
-  },
-  icon: {
-    position: 'absolute',
-    left: '16px',
-    color: '#94a3b8',
-    pointerEvents: 'none',
-  },
-  input: {
-    width: '100%',
-    padding: '14px 16px 14px 44px',
-    backgroundColor: '#f8fafc',
-    border: '1px solid #e2e8f0',
-    borderRadius: '12px',
-    color: '#0f172a',
-    fontSize: '15px',
-    transition: 'all 0.2s',
-    outline: 'none',
-  },
-  eyeButton: {
-    position: 'absolute',
-    right: '16px',
-    background: 'none',
-    border: 'none',
-    color: '#94a3b8',
-    cursor: 'pointer',
-    padding: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    transition: 'color 0.2s',
-  },
-  button: {
-    marginTop: '8px',
-    padding: '14px',
-    backgroundColor: '#0f172a',
-    color: 'white',
-    border: 'none',
-    borderRadius: '12px',
-    fontSize: '16px',
-    fontWeight: '600',
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '8px',
-    transition: 'background-color 0.2s',
-  },
-  error: {
-    padding: '12px',
-    backgroundColor: '#fef2f2',
-    color: '#ef4444',
-    borderRadius: '10px',
-    fontSize: '14px',
-    textAlign: 'center',
-    border: '1px solid #fee2e2',
-  },
 }
