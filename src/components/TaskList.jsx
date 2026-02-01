@@ -168,7 +168,7 @@ export default function TaskList({ user }) {
             <LayoutGrid size={28} color="#0d9488" />
           </div>
           <div>
-            <h1 className="task-title-text">ConBi</h1>
+            <h1 className="task-title-text">Conbi</h1>
             <p className="task-user-email">{user.email}</p>
           </div>
         </div>

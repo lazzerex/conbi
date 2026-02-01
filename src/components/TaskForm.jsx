@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import toast from 'react-hot-toast'
 import { supabase } from '../lib/supabase'
 import { X, Tag, Trash2 } from 'lucide-react'
+import './TaskForm.css'
 
 export default function TaskForm({ user, task, onClose, onSave }) {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
@@ -162,9 +163,26 @@ export default function TaskForm({ user, task, onClose, onSave }) {
         if (tcError) throw tcError
       }
 
+      toast.success(task ? 'Task updated successfully!' : 'Task created successfully!', {
+        style: {
+          background: '#ffffff',
+          color: '#10b981',
+          border: '1px solid #d1fae5',
+          fontWeight: '500',
+        },
+      })
       onSave()
+      onClose()
     } catch (error) {
       setError(error.message)
+      toast.error('Failed to save task. Please try again.', {
+        style: {
+          background: '#ffffff',
+          color: '#ef4444',
+          border: '1px solid #fee2e2',
+          fontWeight: '500',
+        },
+      })
     } finally {
       setLoading(false)
     }

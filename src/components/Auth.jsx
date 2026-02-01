@@ -77,7 +77,7 @@ export default function Auth() {
             <div className="auth-logo-box">
               <LayoutGrid size={24} color="#0ea5e9" />
             </div>
-            <h1 className="auth-brand-name">ConBi</h1>
+            <h1 className="auth-brand-name">Conbi</h1>
           </div>
           
           <div className="auth-info-content">
@@ -100,7 +100,7 @@ export default function Auth() {
             >
               {isLogin 
                 ? 'Sign in to access your tasks, manage projects, and stay organized with your team.' 
-                : 'Join thousands of users who are managing their daily tasks more efficiently with ConBi.'}
+                : 'Join thousands of users who are managing their daily tasks more efficiently with Conbi.'}
             </motion.p>
 
             <motion.div 
@@ -176,7 +176,7 @@ export default function Auth() {
                     <h1 className="auth-title">{isLogin ? 'Sign in' : 'Create account'}</h1>
                     <div className="auth-switch-row">
                       <span className="auth-switch-text">
-                        {isLogin ? "New to ConBi? " : "Already have an account? "}
+                        {isLogin ? "New to Conbi? " : "Already have an account? "}
                       </span>
                       <button
                         type="button"
